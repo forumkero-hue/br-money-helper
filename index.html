@@ -18,7 +18,6 @@
             min-height: 100vh;
         }
 
-        /* Контейнер приложения */
         .app-container {
             max-width: 450px;
             margin: 0 auto;
@@ -28,7 +27,6 @@
             padding-bottom: 70px;
         }
 
-        /* Шапка */
         .header {
             padding: 15px 20px;
             background: #1a1a2e;
@@ -67,13 +65,11 @@
             text-align: center;
         }
 
-        /* Основной контент */
         .content {
             padding: 20px;
             min-height: calc(100vh - 160px);
         }
 
-        /* Карточки */
         .card {
             background: #0f0f1a;
             border-radius: 16px;
@@ -82,7 +78,6 @@
             border: 1px solid #2a2a3e;
         }
 
-        /* Баланс */
         .balance-card {
             text-align: center;
             background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
@@ -140,7 +135,6 @@
             cursor: pointer;
         }
 
-        /* Работы */
         .job-item {
             background: #0f0f1a;
             border-radius: 12px;
@@ -165,7 +159,6 @@
             color: #aaa;
         }
 
-        /* Калькулятор */
         .calc-row {
             margin-bottom: 20px;
         }
@@ -213,98 +206,6 @@
             border-radius: 12px;
         }
 
-        /* Статистика */
-        .stat-periods {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .period-btn {
-            background: #0f0f1a;
-            border: none;
-            color: #888;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .period-btn.active {
-            background: #e94560;
-            color: white;
-        }
-
-        .chart {
-            background: #0f0f1a;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .chart-bars {
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-end;
-            height: 200px;
-            margin-top: 20px;
-        }
-
-        .chart-bar-container {
-            text-align: center;
-            width: 60px;
-        }
-
-        .chart-bar {
-            background: #e94560;
-            width: 40px;
-            border-radius: 8px 8px 0 0;
-            transition: height 0.3s;
-        }
-
-        .chart-label {
-            font-size: 10px;
-            color: #888;
-            margin-top: 8px;
-        }
-
-        /* Цели */
-        .goal-item {
-            background: #0f0f1a;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 12px;
-        }
-
-        .goal-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .progress-bar {
-            background: #2a2a3e;
-            border-radius: 10px;
-            height: 20px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .progress-fill {
-            background: #00ff88;
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.3s;
-        }
-
-        .goal-amount {
-            font-size: 12px;
-            color: #aaa;
-            text-align: right;
-        }
-
-        /* История */
         .history-item {
             background: #0f0f1a;
             border-radius: 10px;
@@ -342,7 +243,40 @@
             color: #e94560;
         }
 
-        /* Нижняя навигация */
+        .goal-item {
+            background: #0f0f1a;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .goal-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            background: #2a2a3e;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            background: #00ff88;
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+
+        .goal-amount {
+            font-size: 12px;
+            color: #aaa;
+            text-align: right;
+        }
+
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -377,7 +311,16 @@
             margin-bottom: 4px;
         }
 
-        /* Модальные окна */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -415,33 +358,21 @@
             gap: 10px;
             margin-top: 20px;
         }
-
-        /* Пустые состояния */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #666;
-        }
-
-        /* Скрытые элементы */
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <div id="header" class="header">
+        <div class="header">
             <div class="header-top">
                 <button id="backBtn" class="back-btn" style="visibility: hidden;">←</button>
                 <span id="headerTitle" class="header-title">BR Money Helper</span>
                 <button id="closeBtn" class="close-btn">✕</button>
             </div>
-            <div id="playerName" class="player-name">Игрок: 123</div>
+            <div id="playerName" class="player-name">Игрок: Загрузка...</div>
         </div>
 
         <div id="content" class="content">
-            <!-- Контент будет загружаться сюда -->
+            <div class="empty-state">Загрузка...</div>
         </div>
 
         <div class="bottom-nav">
@@ -471,42 +402,33 @@
     <script>
         // Telegram WebApp
         let tg = window.Telegram?.WebApp;
-        
         if (tg) {
             tg.expand();
             tg.enableClosingConfirmation();
-            tg.BackButton.onClick(() => {
-                if (history.length > 1) {
-                    history.back();
-                }
-            });
         }
 
-        // Данные приложения
+        // Данные приложения (локальные + синхронизация с ботом)
         let appData = {
-            nickname: "123",
-            server: "52 | РЯЗАНЬ",
+            nickname: "",
+            server: "",
             balance: 0,
             transactions: [],
             goals: [],
-            stats: {
-                by_job: {}
-            }
+            stats: { by_job: {} }
         };
 
-        // Текущая страница
         let currentPage = "main";
         let historyStack = [];
 
-        // Временные данные для калькулятора
-        let tempJob = {
-            name: "Водолаз",
-            count: 11,
-            price: 24000
-        };
+        let tempJob = { name: "Водолаз", count: 11, price: 24000 };
 
-        // Загрузка данных из localStorage
-        function loadData() {
+        // Сохранение в localStorage
+        function saveToLocal() {
+            localStorage.setItem("br_money_helper", JSON.stringify(appData));
+        }
+
+        // Загрузка из localStorage
+        function loadFromLocal() {
             const saved = localStorage.getItem("br_money_helper");
             if (saved) {
                 try {
@@ -516,17 +438,26 @@
             }
         }
 
-        // Сохранение данных
-        function saveData() {
-            localStorage.setItem("br_money_helper", JSON.stringify(appData));
+        // Отправка данных в бота
+        function sendToBot(action, data = {}) {
+            if (tg) {
+                tg.sendData(JSON.stringify({ action, ...data }));
+            }
         }
 
-        // Обновление суммы накопленного в целях
+        // Синхронизация с ботом (запрос данных)
+        function syncWithBot() {
+            if (tg) {
+                sendToBot("get_data");
+            }
+        }
+
+        // Обновление прогресса целей
         function updateGoalProgress() {
             appData.goals.forEach(goal => {
                 goal.progress = Math.min(goal.target, appData.balance);
             });
-            saveData();
+            saveToLocal();
         }
 
         // Показать страницу
@@ -541,14 +472,6 @@
             updateHeader();
             renderContent();
             updateActiveNav();
-            
-            if (tg) {
-                if (historyStack.length === 0) {
-                    tg.BackButton.hide();
-                } else {
-                    tg.BackButton.show();
-                }
-            }
         }
 
         function goBack() {
@@ -558,7 +481,6 @@
                 if (historyStack.length === 0) {
                     const backBtn = document.getElementById("backBtn");
                     if (backBtn) backBtn.style.visibility = "hidden";
-                    if (tg) tg.BackButton.hide();
                 }
             }
         }
@@ -566,7 +488,7 @@
         function updateHeader() {
             const headerTitle = document.getElementById("headerTitle");
             const playerNameSpan = document.getElementById("playerName");
-            playerNameSpan.textContent = `Игрок: ${appData.nickname}`;
+            playerNameSpan.textContent = `Игрок: ${appData.nickname || "Без ника"}`;
             
             const titles = {
                 main: "BR Money Helper",
@@ -590,7 +512,15 @@
             });
         }
 
-        // Рендер контента
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+
+        function getTodayEarned() {
+            const today = new Date().toISOString().split('T')[0];
+            return appData.transactions.filter(t => t.type === "income" && t.date?.startsWith(today)).reduce((s, t) => s + t.amount, 0);
+        }
+
         function renderContent() {
             const content = document.getElementById("content");
             if (!content) return;
@@ -610,6 +540,7 @@
                     break;
                 case "wallet":
                     content.innerHTML = renderWallet();
+                    attachWalletEvents();
                     break;
                 case "statistics":
                     content.innerHTML = renderStatistics();
@@ -629,11 +560,7 @@
         }
 
         function renderMain() {
-            const today = new Date().toISOString().split('T')[0];
-            const todayEarned = appData.transactions
-                .filter(t => t.type === "income" && t.date?.startsWith(today))
-                .reduce((s, t) => s + t.amount, 0);
-            
+            const todayEarned = getTodayEarned();
             return `
                 <div class="balance-card card">
                     <div class="balance-label">Текущий баланс</div>
@@ -659,16 +586,26 @@
             `;
         }
 
+        function renderHistoryItem(t) {
+            const desc = t.job || t.category || "Операция";
+            const sign = t.type === "income" ? "+" : "-";
+            const signClass = t.type === "income" ? "plus" : "minus";
+            const date = new Date(t.date).toLocaleString();
+            return `
+                <div class="history-item">
+                    <div class="history-info">
+                        <div class="history-desc">${desc}</div>
+                        <div class="history-date">${date}</div>
+                    </div>
+                    <div class="history-amount ${signClass}">${sign}${formatNumber(t.amount)} ₽</div>
+                </div>
+            `;
+        }
+
         function attachMainEvents() {
-            document.getElementById("expenseBtn")?.addEventListener("click", () => {
-                showPage("expense");
-            });
-            document.getElementById("topupBtn")?.addEventListener("click", () => {
-                showTopupModal();
-            });
-            document.getElementById("viewAllHistoryBtn")?.addEventListener("click", () => {
-                showPage("history");
-            });
+            document.getElementById("expenseBtn")?.addEventListener("click", () => showPage("expense"));
+            document.getElementById("topupBtn")?.addEventListener("click", showTopupModal);
+            document.getElementById("viewAllHistoryBtn")?.addEventListener("click", () => showPage("history"));
         }
 
         function renderJobs() {
@@ -722,9 +659,9 @@
                     <div class="calc-row">
                         <div class="calc-label">Цена за предмет / рейс (₽)</div>
                         <div class="calc-controls">
-                            <button class="calc-btn" id="priceMinus">-</button>
+                            <button class="calc-btn" id="priceMinus">-100</button>
                             <span class="calc-value" id="priceValue">${formatNumber(tempJob.price)}</span>
-                            <button class="calc-btn" id="pricePlus">+</button>
+                            <button class="calc-btn" id="pricePlus">+100</button>
                         </div>
                     </div>
                     <button class="btn-primary" id="calculateBtn" style="width: 100%; margin-top: 20px;">Рассчитать</button>
@@ -780,17 +717,21 @@
                     }
                     appData.stats.by_job[tempJob.name] += total;
                     updateGoalProgress();
-                    saveData();
+                    saveToLocal();
+                    sendToBot("add_income", { amount: total, job: tempJob.name });
                     showPage("main");
-                    if (tg) tg.HapticFeedback.notificationOccurred("success");
+                    if (tg) tg.HapticFeedback?.notificationOccurred("success");
                 };
             });
         }
 
         function renderWallet() {
-            const totalSpent = appData.transactions
-                .filter(t => t.type === "expense")
-                .reduce((s, t) => s + t.amount, 0);
+            const totalSpent = appData.transactions.filter(t => t.type === "expense").reduce((s, t) => s + t.amount, 0);
+            const weekEarned = (() => {
+                const weekAgo = new Date();
+                weekAgo.setDate(weekAgo.getDate() - 7);
+                return appData.transactions.filter(t => t.type === "income" && new Date(t.date) >= weekAgo).reduce((s, t) => s + t.amount, 0);
+            })();
             
             return `
                 <div class="balance-card card">
@@ -802,10 +743,15 @@
                 </div>
                 <div class="card">
                     <div>📈 Сегодня: +${formatNumber(getTodayEarned())} ₽</div>
-                    <div>📊 За неделю: +${formatNumber(getWeekEarned())} ₽</div>
+                    <div>📊 За неделю: +${formatNumber(weekEarned)} ₽</div>
                     <div>💸 Слито: -${formatNumber(totalSpent)} ₽</div>
                 </div>
             `;
+        }
+
+        function attachWalletEvents() {
+            document.getElementById("expenseBtnWallet")?.addEventListener("click", () => showPage("expense"));
+            document.getElementById("topupBtnWallet")?.addEventListener("click", showTopupModal);
         }
 
         function renderStatistics() {
@@ -824,7 +770,6 @@
             }
             
             const totalEarned = appData.transactions.filter(t => t.type === "income").reduce((s, t) => s + t.amount, 0);
-            const totalSpent = appData.transactions.filter(t => t.type === "expense").reduce((s, t) => s + t.amount, 0);
             
             return `
                 <div class="card">
@@ -875,9 +820,7 @@
         }
 
         function attachGoalsEvents() {
-            document.getElementById("newGoalBtn")?.addEventListener("click", () => {
-                showNewGoalModal();
-            });
+            document.getElementById("newGoalBtn")?.addEventListener("click", showNewGoalModal);
         }
 
         function renderExpense() {
@@ -924,9 +867,10 @@
                     date: new Date().toISOString()
                 });
                 updateGoalProgress();
-                saveData();
+                saveToLocal();
+                sendToBot("add_expense", { amount: amount, category: category });
                 showPage("main");
-                if (tg) tg.HapticFeedback.notificationOccurred("success");
+                if (tg) tg.HapticFeedback?.notificationOccurred("success");
             });
         }
 
@@ -935,22 +879,6 @@
                 return '<div class="empty-state">📭 История операций пуста</div>';
             }
             return appData.transactions.map(t => renderHistoryItem(t)).join('');
-        }
-
-        function renderHistoryItem(t) {
-            const desc = t.job || t.category || "Операция";
-            const sign = t.type === "income" ? "+" : "-";
-            const signClass = t.type === "income" ? "plus" : "minus";
-            const date = new Date(t.date).toLocaleString();
-            return `
-                <div class="history-item">
-                    <div class="history-info">
-                        <div class="history-desc">${desc}</div>
-                        <div class="history-date">${date}</div>
-                    </div>
-                    <div class="history-amount ${signClass}">${sign}${formatNumber(t.amount)} ₽</div>
-                </div>
-            `;
         }
 
         function showTopupModal() {
@@ -981,9 +909,10 @@
                         date: new Date().toISOString()
                     });
                     updateGoalProgress();
-                    saveData();
+                    saveToLocal();
+                    sendToBot("add_income", { amount: amount, job: "Пополнение" });
                     showPage("main");
-                    if (tg) tg.HapticFeedback.notificationOccurred("success");
+                    if (tg) tg.HapticFeedback?.notificationOccurred("success");
                 }
                 modal.remove();
             });
@@ -1016,31 +945,17 @@
                         target: target,
                         progress: Math.min(target, appData.balance)
                     });
-                    saveData();
+                    saveToLocal();
+                    sendToBot("add_goal", { name: name, target: target });
                     showPage("goals");
-                    if (tg) tg.HapticFeedback.notificationOccurred("success");
+                    if (tg) tg.HapticFeedback?.notificationOccurred("success");
                 }
                 modal.remove();
             });
         }
 
-        function formatNumber(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-        }
-
-        function getTodayEarned() {
-            const today = new Date().toISOString().split('T')[0];
-            return appData.transactions.filter(t => t.type === "income" && t.date?.startsWith(today)).reduce((s, t) => s + t.amount, 0);
-        }
-
-        function getWeekEarned() {
-            const weekAgo = new Date();
-            weekAgo.setDate(weekAgo.getDate() - 7);
-            return appData.transactions.filter(t => t.type === "income" && new Date(t.date) >= weekAgo).reduce((s, t) => s + t.amount, 0);
-        }
-
         // Инициализация
-        loadData();
+        loadFromLocal();
         updateGoalProgress();
         
         document.getElementById("backBtn")?.addEventListener("click", goBack);
@@ -1055,6 +970,11 @@
         });
         
         showPage("main");
+        
+        // Запрос синхронизации с ботом
+        if (tg) {
+            sendToBot("get_data");
+        }
     </script>
 </body>
 </html>
