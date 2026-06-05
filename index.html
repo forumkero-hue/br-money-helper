@@ -10,66 +10,37 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #1a1a2e;
             color: #fff;
             min-height: 100vh;
         }
-
         .app-container {
             max-width: 450px;
             margin: 0 auto;
             background: #1a1a2e;
             min-height: 100vh;
-            position: relative;
             padding-bottom: 70px;
         }
-
         .header {
             padding: 15px 20px;
             background: #1a1a2e;
             border-bottom: 1px solid #2a2a3e;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .back-btn, .close-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #e94560;
-            cursor: pointer;
-        }
-
-        .close-btn {
-            color: #888;
-        }
-
-        .header-title {
-            font-size: 18px;
-            font-weight: bold;
             text-align: center;
-            color: #fff;
         }
-
+        .header h1 {
+            font-size: 20px;
+            color: #e94560;
+        }
         .player-name {
             font-size: 12px;
             color: #888;
-            text-align: center;
+            margin-top: 5px;
         }
-
         .content {
             padding: 20px;
-            min-height: calc(100vh - 160px);
         }
-
         .card {
             background: #0f0f1a;
             border-radius: 16px;
@@ -77,32 +48,21 @@
             margin-bottom: 20px;
             border: 1px solid #2a2a3e;
         }
-
         .balance-card {
             text-align: center;
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
             border: 1px solid #e94560;
         }
-
-        .balance-label {
-            font-size: 14px;
-            color: #aaa;
-            margin-bottom: 10px;
-        }
-
         .balance-amount {
-            font-size: 36px;
+            font-size: 42px;
             font-weight: bold;
             color: #00ff88;
-            margin-bottom: 15px;
+            margin: 15px 0;
         }
-
         .balance-buttons {
             display: flex;
             gap: 10px;
             justify-content: center;
         }
-
         .btn-secondary {
             background: #0f0f1a;
             border: 1px solid #e94560;
@@ -112,7 +72,6 @@
             font-size: 14px;
             cursor: pointer;
         }
-
         .btn-primary {
             background: #e94560;
             border: none;
@@ -123,78 +82,57 @@
             font-weight: bold;
             cursor: pointer;
         }
-
         .btn-success {
             background: #00ff88;
             color: #1a1a2e;
-            border: none;
             padding: 12px 30px;
             border-radius: 25px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
+            border: none;
+            width: 100%;
         }
-
         .job-item {
             background: #0f0f1a;
             border-radius: 12px;
             padding: 15px;
             margin-bottom: 12px;
             cursor: pointer;
-            transition: background 0.2s;
+            border: 1px solid #2a2a3e;
         }
-
-        .job-item:hover {
-            background: #1a1a2e;
-        }
-
         .job-title {
             font-size: 18px;
             font-weight: bold;
-            margin-bottom: 5px;
         }
-
         .job-desc {
             font-size: 12px;
             color: #aaa;
+            margin-top: 5px;
         }
-
-        .calc-row {
-            margin-bottom: 20px;
-        }
-
-        .calc-label {
-            font-size: 14px;
-            color: #aaa;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
         .calc-controls {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
+            margin: 15px 0;
         }
-
         .calc-btn {
             background: #2a2a3e;
             border: none;
             color: white;
             font-size: 24px;
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 12px;
             cursor: pointer;
         }
-
         .calc-value {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             min-width: 80px;
             text-align: center;
         }
-
         .result {
             text-align: center;
             font-size: 20px;
@@ -205,7 +143,6 @@
             background: #0f0f1a;
             border-radius: 12px;
         }
-
         .history-item {
             background: #0f0f1a;
             border-radius: 10px;
@@ -215,47 +152,15 @@
             justify-content: space-between;
             align-items: center;
         }
-
-        .history-info {
-            flex: 1;
-        }
-
-        .history-desc {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .history-date {
-            font-size: 10px;
-            color: #666;
-        }
-
-        .history-amount {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .history-amount.plus {
-            color: #00ff88;
-        }
-
-        .history-amount.minus {
-            color: #e94560;
-        }
-
+        .history-amount.plus { color: #00ff88; }
+        .history-amount.minus { color: #e94560; }
+        .history-date { font-size: 10px; color: #666; margin-top: 4px; }
         .goal-item {
             background: #0f0f1a;
             border-radius: 12px;
             padding: 15px;
             margin-bottom: 12px;
         }
-
-        .goal-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
         .progress-bar {
             background: #2a2a3e;
             border-radius: 10px;
@@ -263,20 +168,13 @@
             overflow: hidden;
             margin: 10px 0;
         }
-
         .progress-fill {
             background: #00ff88;
             height: 100%;
+            width: 0%;
             border-radius: 10px;
             transition: width 0.3s;
         }
-
-        .goal-amount {
-            font-size: 12px;
-            color: #aaa;
-            text-align: right;
-        }
-
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -290,7 +188,6 @@
             max-width: 450px;
             margin: 0 auto;
         }
-
         .nav-item {
             text-align: center;
             background: none;
@@ -300,27 +197,10 @@
             cursor: pointer;
             padding: 8px 0;
         }
-
-        .nav-item.active {
-            color: #e94560;
-        }
-
-        .nav-icon {
-            font-size: 24px;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #666;
-        }
-
-        .hidden {
-            display: none;
-        }
-
+        .nav-item.active { color: #e94560; }
+        .nav-icon { font-size: 24px; display: block; margin-bottom: 4px; }
+        .empty-state { text-align: center; padding: 40px 20px; color: #666; }
+        .hidden { display: none; }
         .modal {
             display: none;
             position: fixed;
@@ -328,12 +208,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.9);
             z-index: 1000;
             align-items: center;
             justify-content: center;
         }
-
         .modal-content {
             background: #1a1a2e;
             border-radius: 20px;
@@ -341,7 +220,6 @@
             width: 90%;
             max-width: 320px;
         }
-
         .modal-input {
             background: #0f0f1a;
             border: 1px solid #2a2a3e;
@@ -352,23 +230,28 @@
             margin: 15px 0;
             font-size: 16px;
         }
-
         .modal-buttons {
             display: flex;
             gap: 10px;
             margin-top: 20px;
+        }
+        .select-server {
+            background: #0f0f1a;
+            border: 1px solid #2a2a3e;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            margin: 10px 0;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
     <div class="app-container">
         <div class="header">
-            <div class="header-top">
-                <button id="backBtn" class="back-btn" style="visibility: hidden;">←</button>
-                <span id="headerTitle" class="header-title">BR Money Helper</span>
-                <button id="closeBtn" class="close-btn">✕</button>
-            </div>
-            <div id="playerName" class="player-name">Игрок: Загрузка...</div>
+            <h1>💰 BR Money Helper</h1>
+            <div id="playerName" class="player-name">Игрок: 123</div>
         </div>
 
         <div id="content" class="content">
@@ -376,59 +259,41 @@
         </div>
 
         <div class="bottom-nav">
-            <button class="nav-item" data-page="main">
-                <span class="nav-icon">🏠</span>
-                <span>Главная</span>
-            </button>
-            <button class="nav-item" data-page="jobs">
-                <span class="nav-icon">💼</span>
-                <span>Работы</span>
-            </button>
-            <button class="nav-item" data-page="wallet">
-                <span class="nav-icon">👛</span>
-                <span>Кошелёк</span>
-            </button>
-            <button class="nav-item" data-page="statistics">
-                <span class="nav-icon">📊</span>
-                <span>Статистика</span>
-            </button>
-            <button class="nav-item" data-page="goals">
-                <span class="nav-icon">🎯</span>
-                <span>Цели</span>
-            </button>
+            <button class="nav-item active" data-page="main"><span class="nav-icon">🏠</span><span>Главная</span></button>
+            <button class="nav-item" data-page="jobs"><span class="nav-icon">💼</span><span>Работы</span></button>
+            <button class="nav-item" data-page="wallet"><span class="nav-icon">👛</span><span>Кошелёк</span></button>
+            <button class="nav-item" data-page="statistics"><span class="nav-icon">📊</span><span>Статистика</span></button>
+            <button class="nav-item" data-page="goals"><span class="nav-icon">🎯</span><span>Цели</span></button>
         </div>
     </div>
 
     <script>
-        // Telegram WebApp
-        let tg = window.Telegram?.WebApp;
-        if (tg) {
-            tg.expand();
-            tg.enableClosingConfirmation();
-        }
-
-        // Данные приложения (локальные + синхронизация с ботом)
+        // ========== ДАННЫЕ ==========
         let appData = {
-            nickname: "",
-            server: "",
-            balance: 0,
-            transactions: [],
-            goals: [],
-            stats: { by_job: {} }
+            nickname: "123",
+            server: "52 | РЯЗАНЬ",
+            balance: 12500,
+            transactions: [
+                { type: "income", job: "Водолаз", amount: 264000, date: new Date().toISOString() },
+                { type: "income", job: "ТК Батырево", amount: 225000, date: new Date().toISOString() },
+                { type: "expense", category: "Слил в казино", amount: 50000, date: new Date().toISOString() }
+            ],
+            goals: [
+                { name: "Квартира", target: 1000000, progress: 0 },
+                { name: "Машина", target: 500000, progress: 0 }
+            ],
+            stats: { by_job: { "Водолаз": 264000, "ТК Батырево": 225000 } }
         };
 
         let currentPage = "main";
-        let historyStack = [];
+        let currentJob = { name: "Водолаз", count: 11, price: 24000 };
 
-        let tempJob = { name: "Водолаз", count: 11, price: 24000 };
-
-        // Сохранение в localStorage
-        function saveToLocal() {
+        // ========== СОХРАНЕНИЕ ==========
+        function saveData() {
             localStorage.setItem("br_money_helper", JSON.stringify(appData));
         }
 
-        // Загрузка из localStorage
-        function loadFromLocal() {
+        function loadData() {
             const saved = localStorage.getItem("br_money_helper");
             if (saved) {
                 try {
@@ -436,189 +301,90 @@
                     appData = { ...appData, ...parsed };
                 } catch(e) {}
             }
+            updateGoalProgress();
         }
 
-        // Отправка данных в бота
-        function sendToBot(action, data = {}) {
-            if (tg) {
-                tg.sendData(JSON.stringify({ action, ...data }));
-            }
-        }
-
-        // Синхронизация с ботом (запрос данных)
-        function syncWithBot() {
-            if (tg) {
-                sendToBot("get_data");
-            }
-        }
-
-        // Обновление прогресса целей
         function updateGoalProgress() {
             appData.goals.forEach(goal => {
                 goal.progress = Math.min(goal.target, appData.balance);
             });
-            saveToLocal();
         }
 
-        // Показать страницу
-        function showPage(page, addToHistory = true) {
-            if (addToHistory && currentPage !== page) {
-                historyStack.push(currentPage);
-                const backBtn = document.getElementById("backBtn");
-                if (backBtn) backBtn.style.visibility = "visible";
-            }
+        // ========== ФОРМАТИРОВАНИЕ ==========
+        function formatNum(n) {
+            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+
+        // ========== РЕНДЕР СТРАНИЦ ==========
+        function render() {
+            const content = document.getElementById("content");
+            document.getElementById("playerName").innerHTML = `Игрок: ${appData.nickname}`;
             
-            currentPage = page;
-            updateHeader();
-            renderContent();
-            updateActiveNav();
-        }
-
-        function goBack() {
-            if (historyStack.length > 0) {
-                const prevPage = historyStack.pop();
-                showPage(prevPage, false);
-                if (historyStack.length === 0) {
-                    const backBtn = document.getElementById("backBtn");
-                    if (backBtn) backBtn.style.visibility = "hidden";
-                }
-            }
-        }
-
-        function updateHeader() {
-            const headerTitle = document.getElementById("headerTitle");
-            const playerNameSpan = document.getElementById("playerName");
-            playerNameSpan.textContent = `Игрок: ${appData.nickname || "Без ника"}`;
+            if (currentPage === "main") renderMain(content);
+            else if (currentPage === "jobs") renderJobs(content);
+            else if (currentPage === "job_calc") renderJobCalc(content);
+            else if (currentPage === "wallet") renderWallet(content);
+            else if (currentPage === "statistics") renderStatistics(content);
+            else if (currentPage === "goals") renderGoals(content);
+            else if (currentPage === "expense") renderExpense(content);
+            else if (currentPage === "history") renderHistory(content);
+            else if (currentPage === "profile") renderProfile(content);
             
-            const titles = {
-                main: "BR Money Helper",
-                jobs: "Выбери работу",
-                wallet: "Мой кошелёк",
-                statistics: "Статистика",
-                goals: "Цели",
-                job_calc: tempJob.name,
-                expense: "Фиксация расхода",
-                history: "История операций"
-            };
-            headerTitle.textContent = titles[page] || "BR Money Helper";
-        }
-
-        function updateActiveNav() {
-            document.querySelectorAll(".nav-item").forEach(item => {
-                item.classList.remove("active");
-                if (item.dataset.page === currentPage) {
-                    item.classList.add("active");
-                }
+            document.querySelectorAll(".nav-item").forEach(btn => {
+                btn.classList.remove("active");
+                if (btn.dataset.page === currentPage) btn.classList.add("active");
             });
         }
 
-        function formatNumber(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-        }
-
-        function getTodayEarned() {
-            const today = new Date().toISOString().split('T')[0];
-            return appData.transactions.filter(t => t.type === "income" && t.date?.startsWith(today)).reduce((s, t) => s + t.amount, 0);
-        }
-
-        function renderContent() {
-            const content = document.getElementById("content");
-            if (!content) return;
+        function renderMain(container) {
+            const todayEarned = appData.transactions
+                .filter(t => t.type === "income" && t.date?.startsWith(new Date().toISOString().split('T')[0]))
+                .reduce((s, t) => s + t.amount, 0);
             
-            switch(currentPage) {
-                case "main":
-                    content.innerHTML = renderMain();
-                    attachMainEvents();
-                    break;
-                case "jobs":
-                    content.innerHTML = renderJobs();
-                    attachJobsEvents();
-                    break;
-                case "job_calc":
-                    content.innerHTML = renderJobCalc();
-                    attachCalcEvents();
-                    break;
-                case "wallet":
-                    content.innerHTML = renderWallet();
-                    attachWalletEvents();
-                    break;
-                case "statistics":
-                    content.innerHTML = renderStatistics();
-                    break;
-                case "goals":
-                    content.innerHTML = renderGoals();
-                    attachGoalsEvents();
-                    break;
-                case "expense":
-                    content.innerHTML = renderExpense();
-                    attachExpenseEvents();
-                    break;
-                case "history":
-                    content.innerHTML = renderHistory();
-                    break;
-            }
-        }
-
-        function renderMain() {
-            const todayEarned = getTodayEarned();
-            return `
-                <div class="balance-card card">
-                    <div class="balance-label">Текущий баланс</div>
-                    <div class="balance-amount">${formatNumber(appData.balance)} ₽</div>
+            container.innerHTML = `
+                <div class="card balance-card">
+                    <div class="balance-amount">${formatNum(appData.balance)} ₽</div>
                     <div class="balance-buttons">
-                        <button class="btn-secondary" id="expenseBtn">🔒 Слил / Потратил</button>
-                        <button class="btn-primary" id="topupBtn">+ Пополнить</button>
+                        <button class="btn-secondary" onclick="showPage('expense')">🔒 Слил / Потратил</button>
+                        <button class="btn-primary" onclick="showTopupModal()">+ Пополнить</button>
                     </div>
                 </div>
-                <div style="margin-bottom: 10px; color: #aaa;">
-                    📈 Сегодня: +${formatNumber(todayEarned)} ₽
+                <div class="card">
+                    📈 Сегодня: +${formatNum(todayEarned)} ₽
                 </div>
                 <div style="margin-top: 20px;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
                         <strong>📜 История операций</strong>
-                        <button id="viewAllHistoryBtn" style="background: none; border: none; color: #e94560; cursor: pointer;">Все →</button>
+                        <button onclick="showPage('history')" style="background:none;border:none;color:#e94560;">Все →</button>
                     </div>
-                    ${appData.transactions.length === 0 ? 
-                        '<div class="empty-state">История операций пуста</div>' : 
-                        appData.transactions.slice(0, 5).map(t => renderHistoryItem(t)).join('')
+                    ${appData.transactions.length === 0 ? '<div class="empty-state">История пуста</div>' : 
+                        appData.transactions.slice(0, 5).map(t => `
+                            <div class="history-item">
+                                <div>
+                                    <div>${t.job || t.category || "Операция"}</div>
+                                    <div class="history-date">${new Date(t.date).toLocaleDateString()}</div>
+                                </div>
+                                <div class="history-amount ${t.type === 'income' ? 'plus' : 'minus'}">
+                                    ${t.type === 'income' ? '+' : '-'}${formatNum(t.amount)} ₽
+                                </div>
+                            </div>
+                        `).join('')
                     }
                 </div>
             `;
         }
 
-        function renderHistoryItem(t) {
-            const desc = t.job || t.category || "Операция";
-            const sign = t.type === "income" ? "+" : "-";
-            const signClass = t.type === "income" ? "plus" : "minus";
-            const date = new Date(t.date).toLocaleString();
-            return `
-                <div class="history-item">
-                    <div class="history-info">
-                        <div class="history-desc">${desc}</div>
-                        <div class="history-date">${date}</div>
-                    </div>
-                    <div class="history-amount ${signClass}">${sign}${formatNumber(t.amount)} ₽</div>
-                </div>
-            `;
-        }
-
-        function attachMainEvents() {
-            document.getElementById("expenseBtn")?.addEventListener("click", () => showPage("expense"));
-            document.getElementById("topupBtn")?.addEventListener("click", showTopupModal);
-            document.getElementById("viewAllHistoryBtn")?.addEventListener("click", () => showPage("history"));
-        }
-
-        function renderJobs() {
-            return `
-                <div class="job-item" data-job="diver">
+        function renderJobs(container) {
+            container.innerHTML = `
+                <div class="job-item" onclick="selectJob('diver')">
                     <div class="job-title">🤿 Водолаз</div>
-                    <div class="job-desc">Одна из самых прибыльных работ на Black Russia</div>
+                    <div class="job-desc">Одна из самых прибыльных работ</div>
                 </div>
-                <div class="job-item" data-job="tk">
+                <div class="job-item" onclick="selectJob('tk')">
                     <div class="job-title">🚛 ТК Батырева</div>
-                    <div class="job-desc">Работа дальнобойщика в ТК Батырево</div>
+                    <div class="job-desc">Работа дальнобойщика</div>
                 </div>
-                <div class="job-item" data-job="construction">
+                <div class="job-item" onclick="selectJob('construction')">
                     <div class="job-title">🏗️ Стройка</div>
                     <div class="job-desc">Заработок на стройке</div>
                 </div>
@@ -626,259 +392,219 @@
             `;
         }
 
-        function attachJobsEvents() {
+        function selectJob(type) {
             const jobs = {
                 diver: { name: "Водолаз", count: 11, price: 24000 },
                 tk: { name: "ТК Батырево", count: 5, price: 45000 },
                 construction: { name: "Стройка", count: 4, price: 3900 }
             };
-            
-            document.querySelectorAll(".job-item").forEach(item => {
-                item.addEventListener("click", () => {
-                    const jobKey = item.dataset.job;
-                    if (jobKey && jobs[jobKey]) {
-                        tempJob = { ...jobs[jobKey] };
-                        showPage("job_calc");
-                    }
-                });
-            });
+            currentJob = jobs[type];
+            showPage("job_calc");
         }
 
-        function renderJobCalc() {
-            const total = tempJob.count * tempJob.price;
-            return `
+        function renderJobCalc(container) {
+            container.innerHTML = `
                 <div class="card">
-                    <div class="calc-row">
-                        <div class="calc-label">Количество предметов / ходок</div>
-                        <div class="calc-controls">
-                            <button class="calc-btn" id="countMinus">-</button>
-                            <span class="calc-value" id="countValue">${tempJob.count}</span>
-                            <button class="calc-btn" id="countPlus">+</button>
-                        </div>
+                    <h3 style="text-align:center; margin-bottom:20px;">${currentJob.name}</h3>
+                    <div style="text-align:center; margin-bottom:15px;">Количество предметов / ходок</div>
+                    <div class="calc-controls">
+                        <button class="calc-btn" onclick="changeCount(-1)">-</button>
+                        <span class="calc-value" id="countVal">${currentJob.count}</span>
+                        <button class="calc-btn" onclick="changeCount(1)">+</button>
                     </div>
-                    <div class="calc-row">
-                        <div class="calc-label">Цена за предмет / рейс (₽)</div>
-                        <div class="calc-controls">
-                            <button class="calc-btn" id="priceMinus">-100</button>
-                            <span class="calc-value" id="priceValue">${formatNumber(tempJob.price)}</span>
-                            <button class="calc-btn" id="pricePlus">+100</button>
-                        </div>
+                    <div style="text-align:center; margin:15px 0 10px;">Цена за предмет (₽)</div>
+                    <div class="calc-controls">
+                        <button class="calc-btn" onclick="changePrice(-100)">-100</button>
+                        <span class="calc-value" id="priceVal">${formatNum(currentJob.price)}</span>
+                        <button class="calc-btn" onclick="changePrice(100)">+100</button>
                     </div>
-                    <button class="btn-primary" id="calculateBtn" style="width: 100%; margin-top: 20px;">Рассчитать</button>
+                    <button class="btn-primary" onclick="calculate()" style="width:100%; margin:20px 0 10px;">Рассчитать</button>
                     <div id="resultDiv" class="result hidden"></div>
-                    <button id="addToWalletBtn" class="btn-success hidden" style="width: 100%; margin-top: 10px;">Добавить в кошелёк</button>
+                    <button id="addBtn" class="btn-success hidden" onclick="addToWallet()">Добавить в кошелёк</button>
                 </div>
             `;
         }
 
-        function attachCalcEvents() {
-            const countSpan = document.getElementById("countValue");
-            const priceSpan = document.getElementById("priceValue");
-            
-            document.getElementById("countMinus")?.addEventListener("click", () => {
-                if (tempJob.count > 1) {
-                    tempJob.count--;
-                    countSpan.textContent = tempJob.count;
-                }
-            });
-            document.getElementById("countPlus")?.addEventListener("click", () => {
-                tempJob.count++;
-                countSpan.textContent = tempJob.count;
-            });
-            document.getElementById("priceMinus")?.addEventListener("click", () => {
-                if (tempJob.price > 100) {
-                    tempJob.price -= 100;
-                    priceSpan.textContent = formatNumber(tempJob.price);
-                }
-            });
-            document.getElementById("pricePlus")?.addEventListener("click", () => {
-                tempJob.price += 100;
-                priceSpan.textContent = formatNumber(tempJob.price);
-            });
-            
-            document.getElementById("calculateBtn")?.addEventListener("click", () => {
-                const total = tempJob.count * tempJob.price;
-                const resultDiv = document.getElementById("resultDiv");
-                const addBtn = document.getElementById("addToWalletBtn");
-                resultDiv.textContent = `${tempJob.count} × ${formatNumber(tempJob.price)} = ${formatNumber(total)} ₽`;
-                resultDiv.classList.remove("hidden");
-                addBtn.classList.remove("hidden");
-                
-                addBtn.onclick = () => {
-                    appData.balance += total;
-                    appData.transactions.unshift({
-                        type: "income",
-                        job: tempJob.name,
-                        amount: total,
-                        date: new Date().toISOString()
-                    });
-                    if (!appData.stats.by_job[tempJob.name]) {
-                        appData.stats.by_job[tempJob.name] = 0;
-                    }
-                    appData.stats.by_job[tempJob.name] += total;
-                    updateGoalProgress();
-                    saveToLocal();
-                    sendToBot("add_income", { amount: total, job: tempJob.name });
-                    showPage("main");
-                    if (tg) tg.HapticFeedback?.notificationOccurred("success");
-                };
-            });
+        function changeCount(delta) {
+            currentJob.count = Math.max(1, currentJob.count + delta);
+            document.getElementById("countVal") && (document.getElementById("countVal").innerText = currentJob.count);
         }
 
-        function renderWallet() {
+        function changePrice(delta) {
+            currentJob.price = Math.max(100, currentJob.price + delta);
+            document.getElementById("priceVal") && (document.getElementById("priceVal").innerText = formatNum(currentJob.price));
+        }
+
+        function calculate() {
+            const total = currentJob.count * currentJob.price;
+            const resultDiv = document.getElementById("resultDiv");
+            const addBtn = document.getElementById("addBtn");
+            resultDiv.innerHTML = `${currentJob.count} × ${formatNum(currentJob.price)} = ${formatNum(total)} ₽`;
+            resultDiv.classList.remove("hidden");
+            addBtn.classList.remove("hidden");
+            window.tempTotal = total;
+        }
+
+        function addToWallet() {
+            const total = window.tempTotal;
+            appData.balance += total;
+            appData.transactions.unshift({
+                type: "income",
+                job: currentJob.name,
+                amount: total,
+                date: new Date().toISOString()
+            });
+            if (!appData.stats.by_job[currentJob.name]) appData.stats.by_job[currentJob.name] = 0;
+            appData.stats.by_job[currentJob.name] += total;
+            updateGoalProgress();
+            saveData();
+            showPage("main");
+        }
+
+        function renderWallet(container) {
             const totalSpent = appData.transactions.filter(t => t.type === "expense").reduce((s, t) => s + t.amount, 0);
-            const weekEarned = (() => {
-                const weekAgo = new Date();
-                weekAgo.setDate(weekAgo.getDate() - 7);
-                return appData.transactions.filter(t => t.type === "income" && new Date(t.date) >= weekAgo).reduce((s, t) => s + t.amount, 0);
-            })();
-            
-            return `
-                <div class="balance-card card">
-                    <div class="balance-amount">${formatNumber(appData.balance)} ₽</div>
+            container.innerHTML = `
+                <div class="card balance-card">
+                    <div class="balance-amount">${formatNum(appData.balance)} ₽</div>
                     <div class="balance-buttons">
-                        <button class="btn-secondary" id="expenseBtnWallet">🔒 Слил / Потратил</button>
-                        <button class="btn-primary" id="topupBtnWallet">+ Пополнить</button>
+                        <button class="btn-secondary" onclick="showPage('expense')">🔒 Слил / Потратил</button>
+                        <button class="btn-primary" onclick="showTopupModal()">+ Пополнить</button>
                     </div>
                 </div>
                 <div class="card">
-                    <div>📈 Сегодня: +${formatNumber(getTodayEarned())} ₽</div>
-                    <div>📊 За неделю: +${formatNumber(weekEarned)} ₽</div>
-                    <div>💸 Слито: -${formatNumber(totalSpent)} ₽</div>
+                    <div>💸 Слито всего: ${formatNum(totalSpent)} ₽</div>
                 </div>
             `;
         }
 
-        function attachWalletEvents() {
-            document.getElementById("expenseBtnWallet")?.addEventListener("click", () => showPage("expense"));
-            document.getElementById("topupBtnWallet")?.addEventListener("click", showTopupModal);
-        }
-
-        function renderStatistics() {
+        function renderStatistics(container) {
             let jobsHtml = "";
             if (Object.keys(appData.stats.by_job).length === 0) {
                 jobsHtml = '<div class="empty-state">Статистика по работам пуста</div>';
             } else {
                 jobsHtml = Object.entries(appData.stats.by_job).map(([job, amount]) => `
                     <div class="history-item">
-                        <div class="history-info">
-                            <div class="history-desc">${job}</div>
-                        </div>
-                        <div class="history-amount plus">+${formatNumber(amount)} ₽</div>
+                        <div>${job}</div>
+                        <div class="history-amount plus">+${formatNum(amount)} ₽</div>
                     </div>
                 `).join('');
             }
-            
             const totalEarned = appData.transactions.filter(t => t.type === "income").reduce((s, t) => s + t.amount, 0);
-            
-            return `
-                <div class="card">
-                    <div style="text-align: center;">
-                        <div style="font-size: 28px; font-weight: bold; color: #00ff88;">+${formatNumber(totalEarned)} ₽</div>
-                        <div style="color: #aaa;">Заработано за всё время</div>
-                    </div>
+            container.innerHTML = `
+                <div class="card" style="text-align:center">
+                    <div style="font-size:32px;color:#00ff88;">+${formatNum(totalEarned)} ₽</div>
+                    <div style="color:#aaa;">Заработано за всё время</div>
                 </div>
                 <div class="card">
-                    <div style="margin-bottom: 15px;"><strong>По работам</strong></div>
-                    ${jobsHtml}
+                    <strong>По работам</strong>
+                    <div style="margin-top:15px;">${jobsHtml}</div>
                 </div>
             `;
         }
 
-        function renderGoals() {
+        function renderGoals(container) {
             if (appData.goals.length === 0) {
-                return `
+                container.innerHTML = `
                     <div class="empty-state">
                         <div>📭 У тебя пока нет целей</div>
-                        <div style="margin-top: 10px; color: #aaa;">Создай свою первую цель и начни копить на мечту!</div>
-                        <button class="btn-primary" id="newGoalBtn" style="margin-top: 20px;">+ Новая цель</button>
+                        <button class="btn-primary" onclick="showNewGoalModal()" style="margin-top:20px;">+ Новая цель</button>
                     </div>
                 `;
+                return;
             }
-            
-            return `
-                <div class="card">
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <div style="font-size: 24px; font-weight: bold;">💰 ${formatNumber(appData.balance)} ₽</div>
-                        <div style="color: #aaa;">Всего накоплено</div>
-                    </div>
+            container.innerHTML = `
+                <div class="card" style="text-align:center">
+                    <div style="font-size:28px;">💰 ${formatNum(appData.balance)} ₽</div>
+                    <div style="color:#aaa;">Всего накоплено</div>
                 </div>
-                ${appData.goals.map((goal, i) => {
-                    const percent = (goal.progress / goal.target * 100);
-                    return `
-                        <div class="goal-item">
-                            <div class="goal-title">🎯 ${goal.name}</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: ${percent}%;"></div>
-                            </div>
-                            <div class="goal-amount">${formatNumber(goal.progress)} / ${formatNumber(goal.target)} ₽ (${percent.toFixed(0)}%)</div>
-                        </div>
-                    `;
-                }).join('')}
-                <button class="btn-primary" id="newGoalBtn" style="width: 100%; margin-top: 10px;">+ Новая цель</button>
+                ${appData.goals.map(goal => `
+                    <div class="goal-item">
+                        <div class="goal-title">🎯 ${goal.name}</div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: ${(goal.progress/goal.target*100)}%"></div></div>
+                        <div class="goal-amount">${formatNum(goal.progress)} / ${formatNum(goal.target)} ₽ (${Math.floor(goal.progress/goal.target*100)}%)</div>
+                    </div>
+                `).join('')}
+                <button class="btn-primary" onclick="showNewGoalModal()" style="width:100%">+ Новая цель</button>
             `;
         }
 
-        function attachGoalsEvents() {
-            document.getElementById("newGoalBtn")?.addEventListener("click", showNewGoalModal);
-        }
-
-        function renderExpense() {
-            return `
+        function renderExpense(container) {
+            container.innerHTML = `
                 <div class="card">
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 10px; color: #aaa;">СКОЛЬКО УШЛО?</label>
-                        <input type="number" id="expenseAmount" class="modal-input" placeholder="Сумма в ₽" style="margin: 0;">
+                    <div style="margin-bottom:20px;">
+                        <label style="color:#aaa;">СКОЛЬКО УШЛО?</label>
+                        <input type="number" id="expenseAmount" class="modal-input" placeholder="Сумма в ₽">
                     </div>
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 10px; color: #aaa;">КУДА УШЛИ ДЕНЬГИ?</label>
-                        <select id="expenseCategory" class="modal-input" style="margin: 0;">
-                            <option value="Слил в казино">🎰 Слил в казино</option>
-                            <option value="Еда">🍔 Еда</option>
-                            <option value="Транспорт">🚗 Транспорт</option>
-                            <option value="Развлечения">🎬 Развлечения</option>
-                            <option value="Другое">📦 Другое</option>
+                    <div style="margin-bottom:20px;">
+                        <label style="color:#aaa;">КУДА УШЛИ ДЕНЬГИ?</label>
+                        <select id="expenseCategory" class="select-server">
+                            <option>🎰 Слил в казино</option>
+                            <option>🍔 Еда</option>
+                            <option>🚗 Транспорт</option>
+                            <option>🎬 Развлечения</option>
+                            <option>📦 Другое</option>
                         </select>
                     </div>
-                    <button class="btn-primary" id="submitExpenseBtn" style="width: 100%;">Списать с баланса</button>
+                    <button class="btn-primary" onclick="submitExpense()" style="width:100%;">Списать с баланса</button>
                 </div>
             `;
         }
 
-        function attachExpenseEvents() {
-            document.getElementById("submitExpenseBtn")?.addEventListener("click", () => {
-                const amount = parseInt(document.getElementById("expenseAmount").value);
-                const category = document.getElementById("expenseCategory").value;
-                
-                if (isNaN(amount) || amount <= 0) {
-                    if (tg) tg.showPopup({ title: "Ошибка", message: "Введите корректную сумму!" });
-                    return;
-                }
-                if (amount > appData.balance) {
-                    if (tg) tg.showPopup({ title: "Ошибка", message: "Недостаточно средств!" });
-                    return;
-                }
-                
-                appData.balance -= amount;
-                appData.transactions.unshift({
-                    type: "expense",
-                    category: category,
-                    amount: amount,
-                    date: new Date().toISOString()
-                });
-                updateGoalProgress();
-                saveToLocal();
-                sendToBot("add_expense", { amount: amount, category: category });
-                showPage("main");
-                if (tg) tg.HapticFeedback?.notificationOccurred("success");
+        function submitExpense() {
+            const amount = parseInt(document.getElementById("expenseAmount").value);
+            const category = document.getElementById("expenseCategory").value;
+            if (isNaN(amount) || amount <= 0) { alert("Введите сумму!"); return; }
+            if (amount > appData.balance) { alert("Недостаточно средств!"); return; }
+            appData.balance -= amount;
+            appData.transactions.unshift({
+                type: "expense",
+                category: category,
+                amount: amount,
+                date: new Date().toISOString()
             });
+            updateGoalProgress();
+            saveData();
+            showPage("main");
         }
 
-        function renderHistory() {
+        function renderHistory(container) {
             if (appData.transactions.length === 0) {
-                return '<div class="empty-state">📭 История операций пуста</div>';
+                container.innerHTML = '<div class="empty-state">История пуста</div>';
+                return;
             }
-            return appData.transactions.map(t => renderHistoryItem(t)).join('');
+            container.innerHTML = appData.transactions.map(t => `
+                <div class="history-item">
+                    <div>
+                        <div>${t.job || t.category || "Операция"}</div>
+                        <div class="history-date">${new Date(t.date).toLocaleString()}</div>
+                    </div>
+                    <div class="history-amount ${t.type === 'income' ? 'plus' : 'minus'}">
+                        ${t.type === 'income' ? '+' : '-'}${formatNum(t.amount)} ₽
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderProfile(container) {
+            container.innerHTML = `
+                <div class="card">
+                    <h3>Профиль</h3>
+                    <input type="text" id="nicknameInput" class="modal-input" value="${appData.nickname}" placeholder="Ваш ник">
+                    <select id="serverSelect" class="select-server">
+                        <option ${appData.server === "52 | РЯЗАНЬ" ? "selected" : ""}>52 | РЯЗАНЬ</option>
+                        <option ${appData.server === "1 | МОСКВА" ? "selected" : ""}>1 | МОСКВА</option>
+                        <option ${appData.server === "2 | СПБ" ? "selected" : ""}>2 | СПБ</option>
+                    </select>
+                    <button class="btn-primary" onclick="saveProfile()" style="width:100%;margin-top:15px;">Сохранить</button>
+                </div>
+            `;
+        }
+
+        function saveProfile() {
+            appData.nickname = document.getElementById("nicknameInput").value || "Игрок";
+            appData.server = document.getElementById("serverSelect").value;
+            saveData();
+            showPage("main");
         }
 
         function showTopupModal() {
@@ -886,36 +612,34 @@
             modal.className = "modal";
             modal.innerHTML = `
                 <div class="modal-content">
-                    <h3 style="margin-bottom: 15px;">💰 Пополнение</h3>
-                    <input type="number" id="topupAmount" class="modal-input" placeholder="Сумма в ₽">
+                    <h3>💰 Пополнение</h3>
+                    <input type="number" id="topupAmount" class="modal-input" placeholder="Сумма">
                     <div class="modal-buttons">
-                        <button class="btn-secondary" id="cancelTopup">Отмена</button>
-                        <button class="btn-primary" id="confirmTopup">Пополнить</button>
+                        <button class="btn-secondary" onclick="this.parentElement.parentElement.parentElement.remove()">Отмена</button>
+                        <button class="btn-primary" onclick="confirmTopup()">Пополнить</button>
                     </div>
                 </div>
             `;
             document.body.appendChild(modal);
             modal.style.display = "flex";
-            
-            document.getElementById("cancelTopup")?.addEventListener("click", () => modal.remove());
-            document.getElementById("confirmTopup")?.addEventListener("click", () => {
-                const amount = parseInt(document.getElementById("topupAmount").value);
-                if (!isNaN(amount) && amount > 0) {
-                    appData.balance += amount;
-                    appData.transactions.unshift({
-                        type: "income",
-                        job: "Пополнение",
-                        amount: amount,
-                        date: new Date().toISOString()
-                    });
-                    updateGoalProgress();
-                    saveToLocal();
-                    sendToBot("add_income", { amount: amount, job: "Пополнение" });
-                    showPage("main");
-                    if (tg) tg.HapticFeedback?.notificationOccurred("success");
-                }
-                modal.remove();
-            });
+            window.topupModal = modal;
+        }
+
+        function confirmTopup() {
+            const amount = parseInt(document.getElementById("topupAmount").value);
+            if (!isNaN(amount) && amount > 0) {
+                appData.balance += amount;
+                appData.transactions.unshift({
+                    type: "income",
+                    job: "Пополнение",
+                    amount: amount,
+                    date: new Date().toISOString()
+                });
+                updateGoalProgress();
+                saveData();
+                showPage("main");
+            }
+            window.topupModal?.remove();
         }
 
         function showNewGoalModal() {
@@ -923,58 +647,45 @@
             modal.className = "modal";
             modal.innerHTML = `
                 <div class="modal-content">
-                    <h3 style="margin-bottom: 15px;">🎯 Новая цель</h3>
-                    <input type="text" id="goalName" class="modal-input" placeholder="Название цели">
-                    <input type="number" id="goalTarget" class="modal-input" placeholder="Целевая сумма (₽)">
+                    <h3>🎯 Новая цель</h3>
+                    <input type="text" id="goalName" class="modal-input" placeholder="Название">
+                    <input type="number" id="goalTarget" class="modal-input" placeholder="Сумма">
                     <div class="modal-buttons">
-                        <button class="btn-secondary" id="cancelGoal">Отмена</button>
-                        <button class="btn-primary" id="confirmGoal">Создать</button>
+                        <button class="btn-secondary" onclick="this.parentElement.parentElement.parentElement.remove()">Отмена</button>
+                        <button class="btn-primary" onclick="confirmGoal()">Создать</button>
                     </div>
                 </div>
             `;
             document.body.appendChild(modal);
             modal.style.display = "flex";
-            
-            document.getElementById("cancelGoal")?.addEventListener("click", () => modal.remove());
-            document.getElementById("confirmGoal")?.addEventListener("click", () => {
-                const name = document.getElementById("goalName").value;
-                const target = parseInt(document.getElementById("goalTarget").value);
-                if (name && !isNaN(target) && target > 0) {
-                    appData.goals.push({
-                        name: name,
-                        target: target,
-                        progress: Math.min(target, appData.balance)
-                    });
-                    saveToLocal();
-                    sendToBot("add_goal", { name: name, target: target });
-                    showPage("goals");
-                    if (tg) tg.HapticFeedback?.notificationOccurred("success");
-                }
-                modal.remove();
-            });
+            window.goalModal = modal;
         }
 
-        // Инициализация
-        loadFromLocal();
-        updateGoalProgress();
-        
-        document.getElementById("backBtn")?.addEventListener("click", goBack);
-        document.getElementById("closeBtn")?.addEventListener("click", () => {
-            if (tg) tg.close();
-        });
+        function confirmGoal() {
+            const name = document.getElementById("goalName").value;
+            const target = parseInt(document.getElementById("goalTarget").value);
+            if (name && !isNaN(target) && target > 0) {
+                appData.goals.push({ name, target, progress: 0 });
+                updateGoalProgress();
+                saveData();
+                showPage("goals");
+            }
+            window.goalModal?.remove();
+        }
+
+        function showPage(page) {
+            currentPage = page;
+            render();
+        }
+
+        // ========== ЗАПУСК ==========
+        loadData();
         
         document.querySelectorAll(".nav-item").forEach(btn => {
-            btn.addEventListener("click", () => {
-                showPage(btn.dataset.page);
-            });
+            btn.addEventListener("click", () => showPage(btn.dataset.page));
         });
         
         showPage("main");
-        
-        // Запрос синхронизации с ботом
-        if (tg) {
-            sendToBot("get_data");
-        }
     </script>
 </body>
 </html>
