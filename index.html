@@ -14,7 +14,7 @@
         .back-btn { margin-bottom: 16px; padding: 10px 16px; border: none; border-radius: 8px; background: #2481cc; color: #fff; cursor: pointer; font-size: 14px; font-weight: 500; }
         .hidden { display: none !important; }
         .empty { text-align: center; color: #888; margin-top: 40px; }
-        .error { color: #e53935; padding: 12px; background: #ffebee; border-radius: 8px; margin-bottom: 10px; }
+        .error { color: #e53935; padding: 12px; background: #ffebee; border-radius: 8px; margin-bottom: 10px; word-break: break-word; }
     </style>
 </head>
 <body>
@@ -38,14 +38,15 @@
         const tg = window.Telegram?.WebApp;
         if (tg) { tg.ready(); tg.expand(); }
 
-        // --- ВАЖНО: Впишите сюда ваш логин и название репозитория ---
-        const GITHUB_USER = "ваш_логин";
-        const GITHUB_REPO = "ваш_репозиторий";
+        // --- ВАШИ ДАННЫЕ ---
+        const GITHUB_USER = "forumkero-hue";
+        const GITHUB_REPO = "br-money-helper";
         const BRANCH = "main"; 
         
-        // Ссылки на файлы в папке api (с параметром для обхода кэша)
-        const USERS_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/api/users.json?t=${Date.now()}`;
-        const SAVED_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/api/saved.json?t=${Date.now()}`;
+        // Ссылки на файлы через GitHub Pages (чтобы не было блокировок от raw.githubusercontent)
+        // Добавлен параметр ?t= чтобы браузер не кэшировал старые данные
+        const USERS_URL = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/api/users.json?t=${Date.now()}`;
+        const SAVED_URL = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/api/saved.json?t=${Date.now()}`;
 
         let globalSavedData = {};
 
@@ -55,12 +56,12 @@
             try {
                 // Загружаем users.json
                 const uRes = await fetch(USERS_URL);
-                if (!uRes.ok) throw new Error("Не удалось загрузить users.json. Вы создали его в папке api?");
+                if (!uRes.ok) throw new Error(`Не удалось загрузить users.json (Код: ${uRes.status}). Проверьте GitHub Pages.`);
                 const usersData = await uRes.json();
 
                 // Загружаем saved.json
                 const sRes = await fetch(SAVED_URL);
-                if (!sRes.ok) throw new Error("Не удалось загрузить saved.json. Вы создали его в папке api?");
+                if (!sRes.ok) throw new Error(`Не удалось загрузить saved.json (Код: ${sRes.status}). Проверьте GitHub Pages.`);
                 globalSavedData = await sRes.json();
 
                 renderUsers(usersData);
@@ -80,7 +81,7 @@
             
             const keys = Object.keys(users);
             if (keys.length === 0) {
-                list.innerHTML = "<div class='empty'>Нет подключённых пользователей</div>";
+                list.innerHTML = "<div class='empty'>Нет подключённых пользователей.<br>Отправьте сообщение в Business-чат, чтобы бот обновил базу.</div>";
                 return;
             }
             
