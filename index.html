@@ -43,7 +43,7 @@
         const GITHUB_REPO = "br-money-helper";
         const BRANCH = "main"; 
         
-        // Используем jsDelivr (быстрый CDN, который не блокирует запросы и не кэширует так сильно, как raw)
+        // Используем jsDelivr (CDN, который не кэширует файлы так сильно, как GitHub Pages)
         const USERS_URL = `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${GITHUB_REPO}@${BRANCH}/api/users.json?t=${Date.now()}`;
         const SAVED_URL = `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${GITHUB_REPO}@${BRANCH}/api/saved.json?t=${Date.now()}`;
 
@@ -55,12 +55,12 @@
             try {
                 // Загружаем users.json
                 const uRes = await fetch(USERS_URL);
-                if (!uRes.ok) throw new Error(`Не удалось загрузить users.json (Код: ${uRes.status}).`);
+                if (!uRes.ok) throw new Error(`Не удалось загрузить users.json.`);
                 const usersData = await uRes.json();
 
                 // Загружаем saved.json
                 const sRes = await fetch(SAVED_URL);
-                if (!sRes.ok) throw new Error(`Не удалось загрузить saved.json (Код: ${sRes.status}).`);
+                if (!sRes.ok) throw new Error(`Не удалось загрузить saved.json.`);
                 globalSavedData = await sRes.json();
 
                 renderUsers(usersData);
@@ -80,7 +80,7 @@
             
             const keys = Object.keys(users);
             if (keys.length === 0) {
-                list.innerHTML = "<div class='empty'>Нет подключённых пользователей.<br>Отправьте сообщение в Business-чат, чтобы бот обновил базу.</div>";
+                list.innerHTML = "<div class='empty'>Нет подключённых пользователей.</div>";
                 return;
             }
             
