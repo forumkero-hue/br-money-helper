@@ -2,690 +2,169 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>BR Money Helper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Админ-панель</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a2e;
-            color: #fff;
-            min-height: 100vh;
-        }
-        .app-container {
-            max-width: 450px;
-            margin: 0 auto;
-            background: #1a1a2e;
-            min-height: 100vh;
-            padding-bottom: 70px;
-        }
-        .header {
-            padding: 15px 20px;
-            background: #1a1a2e;
-            border-bottom: 1px solid #2a2a3e;
-            text-align: center;
-        }
-        .header h1 {
-            font-size: 20px;
-            color: #e94560;
-        }
-        .player-name {
-            font-size: 12px;
-            color: #888;
-            margin-top: 5px;
-        }
-        .content {
-            padding: 20px;
-        }
-        .card {
-            background: #0f0f1a;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid #2a2a3e;
-        }
-        .balance-card {
-            text-align: center;
-            border: 1px solid #e94560;
-        }
-        .balance-amount {
-            font-size: 42px;
-            font-weight: bold;
-            color: #00ff88;
-            margin: 15px 0;
-        }
-        .balance-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-        .btn-secondary {
-            background: #0f0f1a;
-            border: 1px solid #e94560;
-            color: #e94560;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .btn-primary {
-            background: #e94560;
-            border: none;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .btn-success {
-            background: #00ff88;
-            color: #1a1a2e;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-        }
-        .job-item {
-            background: #0f0f1a;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            border: 1px solid #2a2a3e;
-        }
-        .job-title {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .job-desc {
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 5px;
-        }
-        .calc-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin: 15px 0;
-        }
-        .calc-btn {
-            background: #2a2a3e;
-            border: none;
-            color: white;
-            font-size: 24px;
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            cursor: pointer;
-        }
-        .calc-value {
-            font-size: 28px;
-            font-weight: bold;
-            min-width: 80px;
-            text-align: center;
-        }
-        .result {
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: #00ff88;
-            margin: 20px 0;
-            padding: 15px;
-            background: #0f0f1a;
-            border-radius: 12px;
-        }
-        .history-item {
-            background: #0f0f1a;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .history-amount.plus { color: #00ff88; }
-        .history-amount.minus { color: #e94560; }
-        .history-date { font-size: 10px; color: #666; margin-top: 4px; }
-        .goal-item {
-            background: #0f0f1a;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 12px;
-        }
-        .progress-bar {
-            background: #2a2a3e;
-            border-radius: 10px;
-            height: 20px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        .progress-fill {
-            background: #00ff88;
-            height: 100%;
-            width: 0%;
-            border-radius: 10px;
-            transition: width 0.3s;
-        }
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #0f0f1a;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid #2a2a3e;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-        .nav-item {
-            text-align: center;
-            background: none;
-            border: none;
-            color: #888;
-            font-size: 12px;
-            cursor: pointer;
-            padding: 8px 0;
-        }
-        .nav-item.active { color: #e94560; }
-        .nav-icon { font-size: 24px; display: block; margin-bottom: 4px; }
-        .empty-state { text-align: center; padding: 40px 20px; color: #666; }
-        .hidden { display: none; }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
-            background: #1a1a2e;
-            border-radius: 20px;
-            padding: 25px;
-            width: 90%;
-            max-width: 320px;
-        }
-        .modal-input {
-            background: #0f0f1a;
-            border: 1px solid #2a2a3e;
-            color: white;
-            padding: 12px;
-            border-radius: 10px;
-            width: 100%;
-            margin: 15px 0;
-            font-size: 16px;
-        }
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .select-server {
-            background: #0f0f1a;
-            border: 1px solid #2a2a3e;
-            color: white;
-            padding: 12px;
-            border-radius: 10px;
-            width: 100%;
-            margin: 10px 0;
-            font-size: 16px;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 16px; background: #ffffff; color: #000000; margin: 0; }
+        h1 { font-size: 20px; margin-top: 0; margin-bottom: 16px; }
+        .card { padding: 12px; margin-bottom: 10px; border-radius: 10px; background: #f0f0f0; cursor: pointer; transition: opacity 0.2s; border: 1px solid #e0e0e0; }
+        .card:active { opacity: 0.7; }
+        .meta { font-size: 13px; color: #666; margin-top: 4px; }
+        .back-btn { margin-bottom: 16px; padding: 10px 16px; border: none; border-radius: 8px; background: #2481cc; color: #fff; cursor: pointer; font-size: 14px; font-weight: 500; }
+        .hidden { display: none !important; }
+        .error { color: #e53935; padding: 12px; background: #ffebee; border-radius: 8px; margin-bottom: 10px; }
+        .empty { text-align: center; color: #888; margin-top: 40px; }
+        
+        .login-box { display: flex; flex-direction: column; gap: 10px; max-width: 300px; margin: 50px auto; }
+        input { padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; outline: none; }
+        input:focus { border-color: #2481cc; }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <div class="header">
-            <h1>💰 BR Money Helper</h1>
-            <div id="playerName" class="player-name">Игрок: 123</div>
+    <div id="login-view">
+        <h1 style="text-align:center;">🔐 Вход в панель</h1>
+        <div class="login-box">
+            <input type="password" id="password" placeholder="Введите пароль" />
+            <button class="back-btn" onclick="login()">Войти</button>
+            <div id="login-error" class="error hidden"></div>
         </div>
+    </div>
 
-        <div id="content" class="content">
-            <div class="empty-state">Загрузка...</div>
+    <div id="main-view" class="hidden">
+        <div id="loading" class="empty hidden">Загрузка...</div>
+        <div id="error" class="error hidden"></div>
+        
+        <div id="users-view" class="hidden">
+            <h1>👤 Пользователи</h1>
+            <div id="users-list"></div>
         </div>
-
-        <div class="bottom-nav">
-            <button class="nav-item active" data-page="main"><span class="nav-icon">🏠</span><span>Главная</span></button>
-            <button class="nav-item" data-page="jobs"><span class="nav-icon">💼</span><span>Работы</span></button>
-            <button class="nav-item" data-page="wallet"><span class="nav-icon">👛</span><span>Кошелёк</span></button>
-            <button class="nav-item" data-page="statistics"><span class="nav-icon">📊</span><span>Статистика</span></button>
-            <button class="nav-item" data-page="goals"><span class="nav-icon">🎯</span><span>Цели</span></button>
+        
+        <div id="chats-view" class="hidden">
+            <button class="back-btn" onclick="showUsers()">← Назад</button>
+            <h1 id="chats-title">💬 Чаты</h1>
+            <div id="chats-list"></div>
         </div>
     </div>
 
     <script>
-        // ========== ДАННЫЕ ==========
-        let appData = {
-            nickname: "123",
-            server: "52 | РЯЗАНЬ",
-            balance: 12500,
-            transactions: [
-                { type: "income", job: "Водолаз", amount: 264000, date: new Date().toISOString() },
-                { type: "income", job: "ТК Батырево", amount: 225000, date: new Date().toISOString() },
-                { type: "expense", category: "Слил в казино", amount: 50000, date: new Date().toISOString() }
-            ],
-            goals: [
-                { name: "Квартира", target: 1000000, progress: 0 },
-                { name: "Машина", target: 500000, progress: 0 }
-            ],
-            stats: { by_job: { "Водолаз": 264000, "ТК Батырево": 225000 } }
-        };
+        const tg = window.Telegram?.WebApp;
+        if (tg) { tg.ready(); tg.expand(); }
 
-        let currentPage = "main";
-        let currentJob = { name: "Водолаз", count: 11, price: 24000 };
+        let AUTH_TOKEN = "";
 
-        // ========== СОХРАНЕНИЕ ==========
-        function saveData() {
-            localStorage.setItem("br_money_helper", JSON.stringify(appData));
-        }
-
-        function loadData() {
-            const saved = localStorage.getItem("br_money_helper");
-            if (saved) {
-                try {
-                    const parsed = JSON.parse(saved);
-                    appData = { ...appData, ...parsed };
-                } catch(e) {}
-            }
-            updateGoalProgress();
-        }
-
-        function updateGoalProgress() {
-            appData.goals.forEach(goal => {
-                goal.progress = Math.min(goal.target, appData.balance);
-            });
-        }
-
-        // ========== ФОРМАТИРОВАНИЕ ==========
-        function formatNum(n) {
-            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-        }
-
-        // ========== РЕНДЕР СТРАНИЦ ==========
-        function render() {
-            const content = document.getElementById("content");
-            document.getElementById("playerName").innerHTML = `Игрок: ${appData.nickname}`;
+        async function login() {
+            const pass = document.getElementById("password").value;
+            const errBox = document.getElementById("login-error");
             
-            if (currentPage === "main") renderMain(content);
-            else if (currentPage === "jobs") renderJobs(content);
-            else if (currentPage === "job_calc") renderJobCalc(content);
-            else if (currentPage === "wallet") renderWallet(content);
-            else if (currentPage === "statistics") renderStatistics(content);
-            else if (currentPage === "goals") renderGoals(content);
-            else if (currentPage === "expense") renderExpense(content);
-            else if (currentPage === "history") renderHistory(content);
-            else if (currentPage === "profile") renderProfile(content);
+            try {
+                const formData = new URLSearchParams();
+                formData.append("password", pass);
+                
+                const res = await fetch("/webapp/api/login", { method: "POST", body: formData });
+                const data = await res.json();
+                
+                if (data.ok) {
+                    AUTH_TOKEN = data.token;
+                    document.getElementById("login-view").classList.add("hidden");
+                    document.getElementById("main-view").classList.remove("hidden");
+                    showUsers();
+                } else {
+                    errBox.textContent = data.err;
+                    errBox.classList.remove("hidden");
+                }
+            } catch (e) {
+                errBox.textContent = "Ошибка сети: " + e.message;
+                errBox.classList.remove("hidden");
+            }
+        }
+
+        async function apiCall(path, body = {}) {
+            const formData = new URLSearchParams();
+            formData.append("token", AUTH_TOKEN);
+            for (const [k, v] of Object.entries(body)) formData.append(k, v);
             
-            document.querySelectorAll(".nav-item").forEach(btn => {
-                btn.classList.remove("active");
-                if (btn.dataset.page === currentPage) btn.classList.add("active");
-            });
+            const res = await fetch(path, { method: "POST", body: formData });
+            const data = await res.json();
+            if (!data.ok) throw new Error(data.err || "Ошибка API");
+            return data;
         }
 
-        function renderMain(container) {
-            const todayEarned = appData.transactions
-                .filter(t => t.type === "income" && t.date?.startsWith(new Date().toISOString().split('T')[0]))
-                .reduce((s, t) => s + t.amount, 0);
+        async function showUsers() {
+            document.getElementById("users-view").classList.remove("hidden");
+            document.getElementById("chats-view").classList.add("hidden");
+            document.getElementById("loading").classList.remove("hidden");
+            document.getElementById("error").classList.add("hidden");
             
-            container.innerHTML = `
-                <div class="card balance-card">
-                    <div class="balance-amount">${formatNum(appData.balance)} ₽</div>
-                    <div class="balance-buttons">
-                        <button class="btn-secondary" onclick="showPage('expense')">🔒 Слил / Потратил</button>
-                        <button class="btn-primary" onclick="showTopupModal()">+ Пополнить</button>
-                    </div>
-                </div>
-                <div class="card">
-                    📈 Сегодня: +${formatNum(todayEarned)} ₽
-                </div>
-                <div style="margin-top: 20px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                        <strong>📜 История операций</strong>
-                        <button onclick="showPage('history')" style="background:none;border:none;color:#e94560;">Все →</button>
-                    </div>
-                    ${appData.transactions.length === 0 ? '<div class="empty-state">История пуста</div>' : 
-                        appData.transactions.slice(0, 5).map(t => `
-                            <div class="history-item">
-                                <div>
-                                    <div>${t.job || t.category || "Операция"}</div>
-                                    <div class="history-date">${new Date(t.date).toLocaleDateString()}</div>
-                                </div>
-                                <div class="history-amount ${t.type === 'income' ? 'plus' : 'minus'}">
-                                    ${t.type === 'income' ? '+' : '-'}${formatNum(t.amount)} ₽
-                                </div>
-                            </div>
-                        `).join('')
-                    }
-                </div>
-            `;
-        }
-
-        function renderJobs(container) {
-            container.innerHTML = `
-                <div class="job-item" onclick="selectJob('diver')">
-                    <div class="job-title">🤿 Водолаз</div>
-                    <div class="job-desc">Одна из самых прибыльных работ</div>
-                </div>
-                <div class="job-item" onclick="selectJob('tk')">
-                    <div class="job-title">🚛 ТК Батырева</div>
-                    <div class="job-desc">Работа дальнобойщика</div>
-                </div>
-                <div class="job-item" onclick="selectJob('construction')">
-                    <div class="job-title">🏗️ Стройка</div>
-                    <div class="job-desc">Заработок на стройке</div>
-                </div>
-                <div class="empty-state">⚡ ОСТАЛЬНЫЕ РАБОТЫ СКОРО ДОБАВИМ</div>
-            `;
-        }
-
-        function selectJob(type) {
-            const jobs = {
-                diver: { name: "Водолаз", count: 11, price: 24000 },
-                tk: { name: "ТК Батырево", count: 5, price: 45000 },
-                construction: { name: "Стройка", count: 4, price: 3900 }
-            };
-            currentJob = jobs[type];
-            showPage("job_calc");
-        }
-
-        function renderJobCalc(container) {
-            container.innerHTML = `
-                <div class="card">
-                    <h3 style="text-align:center; margin-bottom:20px;">${currentJob.name}</h3>
-                    <div style="text-align:center; margin-bottom:15px;">Количество предметов / ходок</div>
-                    <div class="calc-controls">
-                        <button class="calc-btn" onclick="changeCount(-1)">-</button>
-                        <span class="calc-value" id="countVal">${currentJob.count}</span>
-                        <button class="calc-btn" onclick="changeCount(1)">+</button>
-                    </div>
-                    <div style="text-align:center; margin:15px 0 10px;">Цена за предмет (₽)</div>
-                    <div class="calc-controls">
-                        <button class="calc-btn" onclick="changePrice(-100)">-100</button>
-                        <span class="calc-value" id="priceVal">${formatNum(currentJob.price)}</span>
-                        <button class="calc-btn" onclick="changePrice(100)">+100</button>
-                    </div>
-                    <button class="btn-primary" onclick="calculate()" style="width:100%; margin:20px 0 10px;">Рассчитать</button>
-                    <div id="resultDiv" class="result hidden"></div>
-                    <button id="addBtn" class="btn-success hidden" onclick="addToWallet()">Добавить в кошелёк</button>
-                </div>
-            `;
-        }
-
-        function changeCount(delta) {
-            currentJob.count = Math.max(1, currentJob.count + delta);
-            document.getElementById("countVal") && (document.getElementById("countVal").innerText = currentJob.count);
-        }
-
-        function changePrice(delta) {
-            currentJob.price = Math.max(100, currentJob.price + delta);
-            document.getElementById("priceVal") && (document.getElementById("priceVal").innerText = formatNum(currentJob.price));
-        }
-
-        function calculate() {
-            const total = currentJob.count * currentJob.price;
-            const resultDiv = document.getElementById("resultDiv");
-            const addBtn = document.getElementById("addBtn");
-            resultDiv.innerHTML = `${currentJob.count} × ${formatNum(currentJob.price)} = ${formatNum(total)} ₽`;
-            resultDiv.classList.remove("hidden");
-            addBtn.classList.remove("hidden");
-            window.tempTotal = total;
-        }
-
-        function addToWallet() {
-            const total = window.tempTotal;
-            appData.balance += total;
-            appData.transactions.unshift({
-                type: "income",
-                job: currentJob.name,
-                amount: total,
-                date: new Date().toISOString()
-            });
-            if (!appData.stats.by_job[currentJob.name]) appData.stats.by_job[currentJob.name] = 0;
-            appData.stats.by_job[currentJob.name] += total;
-            updateGoalProgress();
-            saveData();
-            showPage("main");
-        }
-
-        function renderWallet(container) {
-            const totalSpent = appData.transactions.filter(t => t.type === "expense").reduce((s, t) => s + t.amount, 0);
-            container.innerHTML = `
-                <div class="card balance-card">
-                    <div class="balance-amount">${formatNum(appData.balance)} ₽</div>
-                    <div class="balance-buttons">
-                        <button class="btn-secondary" onclick="showPage('expense')">🔒 Слил / Потратил</button>
-                        <button class="btn-primary" onclick="showTopupModal()">+ Пополнить</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div>💸 Слито всего: ${formatNum(totalSpent)} ₽</div>
-                </div>
-            `;
-        }
-
-        function renderStatistics(container) {
-            let jobsHtml = "";
-            if (Object.keys(appData.stats.by_job).length === 0) {
-                jobsHtml = '<div class="empty-state">Статистика по работам пуста</div>';
-            } else {
-                jobsHtml = Object.entries(appData.stats.by_job).map(([job, amount]) => `
-                    <div class="history-item">
-                        <div>${job}</div>
-                        <div class="history-amount plus">+${formatNum(amount)} ₽</div>
-                    </div>
-                `).join('');
+            try {
+                const data = await apiCall("/webapp/api/users");
+                const list = document.getElementById("users-list");
+                list.innerHTML = "";
+                
+                if (data.users.length === 0) {
+                    list.innerHTML = "<div class='empty'>Нет подключённых пользователей</div>";
+                    return;
+                }
+                
+                for (const u of data.users) {
+                    const div = document.createElement("div");
+                    div.className = "card";
+                    div.innerHTML = `
+                        <strong>ID: ${u.user_id}</strong>
+                        <div class="meta">Business Connection: ${u.connection_id.slice(0, 15)}...</div>
+                    `;
+                    div.onclick = () => showChats(u.connection_id, u.user_id);
+                    list.appendChild(div);
+                }
+            } catch (e) {
+                showError(e.message);
+            } finally {
+                document.getElementById("loading").classList.add("hidden");
             }
-            const totalEarned = appData.transactions.filter(t => t.type === "income").reduce((s, t) => s + t.amount, 0);
-            container.innerHTML = `
-                <div class="card" style="text-align:center">
-                    <div style="font-size:32px;color:#00ff88;">+${formatNum(totalEarned)} ₽</div>
-                    <div style="color:#aaa;">Заработано за всё время</div>
-                </div>
-                <div class="card">
-                    <strong>По работам</strong>
-                    <div style="margin-top:15px;">${jobsHtml}</div>
-                </div>
-            `;
         }
 
-        function renderGoals(container) {
-            if (appData.goals.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div>📭 У тебя пока нет целей</div>
-                        <button class="btn-primary" onclick="showNewGoalModal()" style="margin-top:20px;">+ Новая цель</button>
-                    </div>
-                `;
-                return;
+        async function showChats(connId, userId) {
+            document.getElementById("users-view").classList.add("hidden");
+            document.getElementById("chats-view").classList.remove("hidden");
+            document.getElementById("chats-title").textContent = `💬 Чаты пользователя ${userId}`;
+            document.getElementById("loading").classList.remove("hidden");
+            document.getElementById("error").classList.add("hidden");
+            
+            try {
+                const data = await apiCall("/webapp/api/chats", { connection_id: connId });
+                const list = document.getElementById("chats-list");
+                list.innerHTML = "";
+                
+                if (data.chats.length === 0) {
+                    list.innerHTML = "<div class='empty'>Сообщений пока не было</div>";
+                    return;
+                }
+                
+                for (const c of data.chats) {
+                    const div = document.createElement("div");
+                    div.className = "card";
+                    div.innerHTML = `
+                        <strong>${escapeHtml(c.chat_title)}</strong>
+                        <div class="meta">ID: ${c.chat_id} · Сообщений: ${c.message_count}</div>
+                    `;
+                    list.appendChild(div);
+                }
+            } catch (e) {
+                showError(e.message);
+            } finally {
+                document.getElementById("loading").classList.add("hidden");
             }
-            container.innerHTML = `
-                <div class="card" style="text-align:center">
-                    <div style="font-size:28px;">💰 ${formatNum(appData.balance)} ₽</div>
-                    <div style="color:#aaa;">Всего накоплено</div>
-                </div>
-                ${appData.goals.map(goal => `
-                    <div class="goal-item">
-                        <div class="goal-title">🎯 ${goal.name}</div>
-                        <div class="progress-bar"><div class="progress-fill" style="width: ${(goal.progress/goal.target*100)}%"></div></div>
-                        <div class="goal-amount">${formatNum(goal.progress)} / ${formatNum(goal.target)} ₽ (${Math.floor(goal.progress/goal.target*100)}%)</div>
-                    </div>
-                `).join('')}
-                <button class="btn-primary" onclick="showNewGoalModal()" style="width:100%">+ Новая цель</button>
-            `;
         }
 
-        function renderExpense(container) {
-            container.innerHTML = `
-                <div class="card">
-                    <div style="margin-bottom:20px;">
-                        <label style="color:#aaa;">СКОЛЬКО УШЛО?</label>
-                        <input type="number" id="expenseAmount" class="modal-input" placeholder="Сумма в ₽">
-                    </div>
-                    <div style="margin-bottom:20px;">
-                        <label style="color:#aaa;">КУДА УШЛИ ДЕНЬГИ?</label>
-                        <select id="expenseCategory" class="select-server">
-                            <option>🎰 Слил в казино</option>
-                            <option>🍔 Еда</option>
-                            <option>🚗 Транспорт</option>
-                            <option>🎬 Развлечения</option>
-                            <option>📦 Другое</option>
-                        </select>
-                    </div>
-                    <button class="btn-primary" onclick="submitExpense()" style="width:100%;">Списать с баланса</button>
-                </div>
-            `;
+        function showError(msg) {
+            const el = document.getElementById("error");
+            el.textContent = "Ошибка: " + msg;
+            el.classList.remove("hidden");
         }
 
-        function submitExpense() {
-            const amount = parseInt(document.getElementById("expenseAmount").value);
-            const category = document.getElementById("expenseCategory").value;
-            if (isNaN(amount) || amount <= 0) { alert("Введите сумму!"); return; }
-            if (amount > appData.balance) { alert("Недостаточно средств!"); return; }
-            appData.balance -= amount;
-            appData.transactions.unshift({
-                type: "expense",
-                category: category,
-                amount: amount,
-                date: new Date().toISOString()
-            });
-            updateGoalProgress();
-            saveData();
-            showPage("main");
+        function escapeHtml(s) {
+            return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
-
-        function renderHistory(container) {
-            if (appData.transactions.length === 0) {
-                container.innerHTML = '<div class="empty-state">История пуста</div>';
-                return;
-            }
-            container.innerHTML = appData.transactions.map(t => `
-                <div class="history-item">
-                    <div>
-                        <div>${t.job || t.category || "Операция"}</div>
-                        <div class="history-date">${new Date(t.date).toLocaleString()}</div>
-                    </div>
-                    <div class="history-amount ${t.type === 'income' ? 'plus' : 'minus'}">
-                        ${t.type === 'income' ? '+' : '-'}${formatNum(t.amount)} ₽
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderProfile(container) {
-            container.innerHTML = `
-                <div class="card">
-                    <h3>Профиль</h3>
-                    <input type="text" id="nicknameInput" class="modal-input" value="${appData.nickname}" placeholder="Ваш ник">
-                    <select id="serverSelect" class="select-server">
-                        <option ${appData.server === "52 | РЯЗАНЬ" ? "selected" : ""}>52 | РЯЗАНЬ</option>
-                        <option ${appData.server === "1 | МОСКВА" ? "selected" : ""}>1 | МОСКВА</option>
-                        <option ${appData.server === "2 | СПБ" ? "selected" : ""}>2 | СПБ</option>
-                    </select>
-                    <button class="btn-primary" onclick="saveProfile()" style="width:100%;margin-top:15px;">Сохранить</button>
-                </div>
-            `;
-        }
-
-        function saveProfile() {
-            appData.nickname = document.getElementById("nicknameInput").value || "Игрок";
-            appData.server = document.getElementById("serverSelect").value;
-            saveData();
-            showPage("main");
-        }
-
-        function showTopupModal() {
-            const modal = document.createElement("div");
-            modal.className = "modal";
-            modal.innerHTML = `
-                <div class="modal-content">
-                    <h3>💰 Пополнение</h3>
-                    <input type="number" id="topupAmount" class="modal-input" placeholder="Сумма">
-                    <div class="modal-buttons">
-                        <button class="btn-secondary" onclick="this.parentElement.parentElement.parentElement.remove()">Отмена</button>
-                        <button class="btn-primary" onclick="confirmTopup()">Пополнить</button>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
-            modal.style.display = "flex";
-            window.topupModal = modal;
-        }
-
-        function confirmTopup() {
-            const amount = parseInt(document.getElementById("topupAmount").value);
-            if (!isNaN(amount) && amount > 0) {
-                appData.balance += amount;
-                appData.transactions.unshift({
-                    type: "income",
-                    job: "Пополнение",
-                    amount: amount,
-                    date: new Date().toISOString()
-                });
-                updateGoalProgress();
-                saveData();
-                showPage("main");
-            }
-            window.topupModal?.remove();
-        }
-
-        function showNewGoalModal() {
-            const modal = document.createElement("div");
-            modal.className = "modal";
-            modal.innerHTML = `
-                <div class="modal-content">
-                    <h3>🎯 Новая цель</h3>
-                    <input type="text" id="goalName" class="modal-input" placeholder="Название">
-                    <input type="number" id="goalTarget" class="modal-input" placeholder="Сумма">
-                    <div class="modal-buttons">
-                        <button class="btn-secondary" onclick="this.parentElement.parentElement.parentElement.remove()">Отмена</button>
-                        <button class="btn-primary" onclick="confirmGoal()">Создать</button>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
-            modal.style.display = "flex";
-            window.goalModal = modal;
-        }
-
-        function confirmGoal() {
-            const name = document.getElementById("goalName").value;
-            const target = parseInt(document.getElementById("goalTarget").value);
-            if (name && !isNaN(target) && target > 0) {
-                appData.goals.push({ name, target, progress: 0 });
-                updateGoalProgress();
-                saveData();
-                showPage("goals");
-            }
-            window.goalModal?.remove();
-        }
-
-        function showPage(page) {
-            currentPage = page;
-            render();
-        }
-
-        // ========== ЗАПУСК ==========
-        loadData();
-        
-        document.querySelectorAll(".nav-item").forEach(btn => {
-            btn.addEventListener("click", () => showPage(btn.dataset.page));
-        });
-        
-        showPage("main");
     </script>
 </body>
 </html>
