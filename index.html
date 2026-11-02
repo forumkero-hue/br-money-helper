@@ -6,33 +6,20 @@
     <title>Админ-панель</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 16px; background: #ffffff; color: #000000; margin: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; padding: 16px; background: #fff; color: #000; margin: 0; }
         h1 { font-size: 20px; margin-top: 0; margin-bottom: 16px; }
         .card { padding: 12px; margin-bottom: 10px; border-radius: 10px; background: #f0f0f0; cursor: pointer; transition: opacity 0.2s; border: 1px solid #e0e0e0; }
         .card:active { opacity: 0.7; }
         .meta { font-size: 13px; color: #666; margin-top: 4px; }
         .back-btn { margin-bottom: 16px; padding: 10px 16px; border: none; border-radius: 8px; background: #2481cc; color: #fff; cursor: pointer; font-size: 14px; font-weight: 500; }
         .hidden { display: none !important; }
-        .error { color: #e53935; padding: 12px; background: #ffebee; border-radius: 8px; margin-bottom: 10px; }
         .empty { text-align: center; color: #888; margin-top: 40px; }
-        
-        .login-box { display: flex; flex-direction: column; gap: 10px; max-width: 300px; margin: 50px auto; }
-        input { padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; outline: none; }
-        input:focus { border-color: #2481cc; }
+        .error { color: #e53935; padding: 12px; background: #ffebee; border-radius: 8px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
-    <div id="login-view">
-        <h1 style="text-align:center;">🔐 Вход в панель</h1>
-        <div class="login-box">
-            <input type="password" id="password" placeholder="Введите пароль" />
-            <button class="back-btn" onclick="login()">Войти</button>
-            <div id="login-error" class="error hidden"></div>
-        </div>
-    </div>
-
-    <div id="main-view" class="hidden">
-        <div id="loading" class="empty hidden">Загрузка...</div>
+    <div id="main-view">
+        <div id="loading" class="empty">Загрузка данных с GitHub...</div>
         <div id="error" class="error hidden"></div>
         
         <div id="users-view" class="hidden">
@@ -51,108 +38,107 @@
         const tg = window.Telegram?.WebApp;
         if (tg) { tg.ready(); tg.expand(); }
 
-        let AUTH_TOKEN = "";
+        // --- ВАЖНО: Впишите сюда ваш логин и название репозитория ---
+        const GITHUB_USER = "ваш_логин";
+        const GITHUB_REPO = "ваш_репозиторий";
+        const BRANCH = "main"; 
+        
+        // Ссылки на файлы в папке api (с параметром для обхода кэша)
+        const USERS_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/api/users.json?t=${Date.now()}`;
+        const SAVED_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/api/saved.json?t=${Date.now()}`;
 
-        async function login() {
-            const pass = document.getElementById("password").value;
-            const errBox = document.getElementById("login-error");
-            
+        let globalSavedData = {};
+
+        async function fetchData() {
+            document.getElementById("loading").classList.remove("hidden");
+            document.getElementById("error").classList.add("hidden");
             try {
-                const formData = new URLSearchParams();
-                formData.append("password", pass);
-                
-                const res = await fetch("/webapp/api/login", { method: "POST", body: formData });
-                const data = await res.json();
-                
-                if (data.ok) {
-                    AUTH_TOKEN = data.token;
-                    document.getElementById("login-view").classList.add("hidden");
-                    document.getElementById("main-view").classList.remove("hidden");
-                    showUsers();
-                } else {
-                    errBox.textContent = data.err;
-                    errBox.classList.remove("hidden");
-                }
+                // Загружаем users.json
+                const uRes = await fetch(USERS_URL);
+                if (!uRes.ok) throw new Error("Не удалось загрузить users.json. Вы создали его в папке api?");
+                const usersData = await uRes.json();
+
+                // Загружаем saved.json
+                const sRes = await fetch(SAVED_URL);
+                if (!sRes.ok) throw new Error("Не удалось загрузить saved.json. Вы создали его в папке api?");
+                globalSavedData = await sRes.json();
+
+                renderUsers(usersData);
             } catch (e) {
-                errBox.textContent = "Ошибка сети: " + e.message;
-                errBox.classList.remove("hidden");
+                showError(e.message);
+            } finally {
+                document.getElementById("loading").classList.add("hidden");
             }
         }
 
-        async function apiCall(path, body = {}) {
-            const formData = new URLSearchParams();
-            formData.append("token", AUTH_TOKEN);
-            for (const [k, v] of Object.entries(body)) formData.append(k, v);
-            
-            const res = await fetch(path, { method: "POST", body: formData });
-            const data = await res.json();
-            if (!data.ok) throw new Error(data.err || "Ошибка API");
-            return data;
-        }
-
-        async function showUsers() {
+        function renderUsers(users) {
             document.getElementById("users-view").classList.remove("hidden");
             document.getElementById("chats-view").classList.add("hidden");
-            document.getElementById("loading").classList.remove("hidden");
-            document.getElementById("error").classList.add("hidden");
             
-            try {
-                const data = await apiCall("/webapp/api/users");
-                const list = document.getElementById("users-list");
-                list.innerHTML = "";
-                
-                if (data.users.length === 0) {
-                    list.innerHTML = "<div class='empty'>Нет подключённых пользователей</div>";
-                    return;
-                }
-                
-                for (const u of data.users) {
-                    const div = document.createElement("div");
-                    div.className = "card";
-                    div.innerHTML = `
-                        <strong>ID: ${u.user_id}</strong>
-                        <div class="meta">Business Connection: ${u.connection_id.slice(0, 15)}...</div>
-                    `;
-                    div.onclick = () => showChats(u.connection_id, u.user_id);
-                    list.appendChild(div);
-                }
-            } catch (e) {
-                showError(e.message);
-            } finally {
-                document.getElementById("loading").classList.add("hidden");
+            const list = document.getElementById("users-list");
+            list.innerHTML = "";
+            
+            const keys = Object.keys(users);
+            if (keys.length === 0) {
+                list.innerHTML = "<div class='empty'>Нет подключённых пользователей</div>";
+                return;
+            }
+            
+            for (const conn_id of keys) {
+                const u = users[conn_id];
+                const div = document.createElement("div");
+                div.className = "card";
+                div.innerHTML = `
+                    <strong>ID: ${u.user_id}</strong>
+                    <div class="meta">Connection: ${conn_id.slice(0, 15)}...</div>
+                `;
+                div.onclick = () => renderChats(conn_id, u.user_id);
+                list.appendChild(div);
             }
         }
 
-        async function showChats(connId, userId) {
+        function renderChats(connId, userId) {
             document.getElementById("users-view").classList.add("hidden");
             document.getElementById("chats-view").classList.remove("hidden");
-            document.getElementById("chats-title").textContent = `💬 Чаты пользователя ${userId}`;
-            document.getElementById("loading").classList.remove("hidden");
-            document.getElementById("error").classList.add("hidden");
+            document.getElementById("chats-title").textContent = `💬 Чаты (ID: ${userId})`;
             
-            try {
-                const data = await apiCall("/webapp/api/chats", { connection_id: connId });
-                const list = document.getElementById("chats-list");
-                list.innerHTML = "";
+            const list = document.getElementById("chats-list");
+            list.innerHTML = "";
+            
+            const chats = {};
+            const prefix = `b:${connId}:`;
+            
+            // Парсим saved.json
+            for (const [key, rec] of Object.entries(globalSavedData)) {
+                if (!key.startsWith(prefix)) continue;
+                const parts = key.split(":");
+                if (parts.length < 4) continue;
                 
-                if (data.chats.length === 0) {
-                    list.innerHTML = "<div class='empty'>Сообщений пока не было</div>";
-                    return;
-                }
+                const chat_id = parts[2];
+                const chat_title = rec.chat_title || `Chat ${chat_id}`;
                 
-                for (const c of data.chats) {
-                    const div = document.createElement("div");
-                    div.className = "card";
-                    div.innerHTML = `
-                        <strong>${escapeHtml(c.chat_title)}</strong>
-                        <div class="meta">ID: ${c.chat_id} · Сообщений: ${c.message_count}</div>
-                    `;
-                    list.appendChild(div);
+                if (!chats[chat_id]) {
+                    chats[chat_id] = { id: chat_id, title: chat_title, count: 0, last_ts: 0 };
                 }
-            } catch (e) {
-                showError(e.message);
-            } finally {
-                document.getElementById("loading").classList.add("hidden");
+                chats[chat_id].count++;
+                chats[chat_id].last_ts = Math.max(chats[chat_id].last_ts, rec.ts || 0);
+            }
+            
+            const sortedChats = Object.values(chats).sort((a, b) => b.last_ts - a.last_ts);
+            
+            if (sortedChats.length === 0) {
+                list.innerHTML = "<div class='empty'>Сообщений пока не было</div>";
+                return;
+            }
+            
+            for (const c of sortedChats) {
+                const div = document.createElement("div");
+                div.className = "card";
+                div.innerHTML = `
+                    <strong>${escapeHtml(c.title)}</strong>
+                    <div class="meta">ID: ${c.id} · Сообщений: ${c.count}</div>
+                `;
+                list.appendChild(div);
             }
         }
 
@@ -165,6 +151,9 @@
         function escapeHtml(s) {
             return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
+
+        // Запускаем загрузку при открытии
+        fetchData();
     </script>
 </body>
 </html>
