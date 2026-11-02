@@ -43,10 +43,9 @@
         const GITHUB_REPO = "br-money-helper";
         const BRANCH = "main"; 
         
-        // Ссылки на файлы через GitHub Pages (чтобы не было блокировок от raw.githubusercontent)
-        // Добавлен параметр ?t= чтобы браузер не кэшировал старые данные
-        const USERS_URL = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/api/users.json?t=${Date.now()}`;
-        const SAVED_URL = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/api/saved.json?t=${Date.now()}`;
+        // Используем jsDelivr (быстрый CDN, который не блокирует запросы и не кэширует так сильно, как raw)
+        const USERS_URL = `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${GITHUB_REPO}@${BRANCH}/api/users.json?t=${Date.now()}`;
+        const SAVED_URL = `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${GITHUB_REPO}@${BRANCH}/api/saved.json?t=${Date.now()}`;
 
         let globalSavedData = {};
 
@@ -56,12 +55,12 @@
             try {
                 // Загружаем users.json
                 const uRes = await fetch(USERS_URL);
-                if (!uRes.ok) throw new Error(`Не удалось загрузить users.json (Код: ${uRes.status}). Проверьте GitHub Pages.`);
+                if (!uRes.ok) throw new Error(`Не удалось загрузить users.json (Код: ${uRes.status}).`);
                 const usersData = await uRes.json();
 
                 // Загружаем saved.json
                 const sRes = await fetch(SAVED_URL);
-                if (!sRes.ok) throw new Error(`Не удалось загрузить saved.json (Код: ${sRes.status}). Проверьте GitHub Pages.`);
+                if (!sRes.ok) throw new Error(`Не удалось загрузить saved.json (Код: ${sRes.status}).`);
                 globalSavedData = await sRes.json();
 
                 renderUsers(usersData);
@@ -109,7 +108,6 @@
             const chats = {};
             const prefix = `b:${connId}:`;
             
-            // Парсим saved.json
             for (const [key, rec] of Object.entries(globalSavedData)) {
                 if (!key.startsWith(prefix)) continue;
                 const parts = key.split(":");
@@ -153,7 +151,6 @@
             return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
 
-        // Запускаем загрузку при открытии
         fetchData();
     </script>
 </body>
